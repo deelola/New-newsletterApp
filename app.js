@@ -1,4 +1,5 @@
 // jshint Esversion:6
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const https = require('https');
@@ -12,11 +13,14 @@ app.get('/', function(req,res){
     res.sendFile(__dirname + "/signup.html");
 })
 
+
+
+
 app.post('/', function(req,res){
     const firstName = req.body.firstname;
     const lastName = req.body.lastname;
     const email = req.body.email;
-    console.log(firstName);
+    // console.log(firstName);
 
     const data = {
         "members":[
@@ -32,10 +36,13 @@ app.post('/', function(req,res){
     };
     const jsonData = JSON.stringify(data);
 
+    
+    const accessToken = require('./config');
+
     const url = "https://us2.api.mailchimp.com/3.0/lists/4e93686eb6";
     const options = {
         method: 'POST',
-        auth: "Damiosh:4a2e6c5caa8b2297695b1f3f99ad93f1-us2"
+        auth: accessToken.auth
     }
 
    const request = https.request(url, options, function(response){
@@ -63,5 +70,8 @@ app.listen(process.env.PORT || 3000, function(){
     console.log("Server running on port 3000");
 });
 
-// api-key-4a2e6c5caa8b2297695b1f3f99ad93f1-us2
-// unique id-4e93686eb6
+
+function newFunction() {
+    return require('accessToken');
+}
+
