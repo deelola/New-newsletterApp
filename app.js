@@ -37,7 +37,7 @@ app.post('/', function(req,res){
     const jsonData = JSON.stringify(data);
 
     
-    const accessToken = require('./config');
+    const accessToken = require('./config/config');
 
     const url = "https://us2.api.mailchimp.com/3.0/lists/4e93686eb6";
     const options = {
